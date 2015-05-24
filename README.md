@@ -4,6 +4,8 @@ frontend-nanodegree-arcade-game
 Use keyboard arrow keys to move the player.
 The water is safe and the lawn is safe from bugs.
 Watch out for the bugs, if they run over you, you use a life.
+The player can sometimes be moving left quickly enough to avoid a collision.
+(This is a bug.)
 Collect the gems.
 New gems appear randomly after capture even in the occupied square.
 (Some people might call this a bug, others might call it a feature.)
