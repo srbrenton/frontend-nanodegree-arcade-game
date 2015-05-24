@@ -26,7 +26,7 @@ var Engine = (function(global) {
         lastTime;
 
     canvas.width = 505;
-    canvas.height = 606;
+    canvas.height = 689;
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -94,6 +94,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
+        gem.update();
         player.update();
     }
 
@@ -113,9 +114,10 @@ var Engine = (function(global) {
                 'images/stone-block.png',   // Row 2 of 3 of stone
                 'images/stone-block.png',   // Row 3 of 3 of stone
                 'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/grass-block.png',   // Row 2 of 2 of grass
+                'images/Selector.png'       // Row 1 of 1 for Scores
             ],
-            numRows = 6,
+            numRows = 7,
             numCols = 5,
             row, col;
 
@@ -136,6 +138,13 @@ var Engine = (function(global) {
             }
         }
 
+        // lets put up some statistics
+        ctx.font = '24px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Gems', 151, 8 * 83 - 40);
+        ctx.fillText(player.gems, 151, 8 * 83 - 14);
+        ctx.fillText('Lives', 351 , 8 * 83 - 40);
+        ctx.fillText(player.lives, 351, 8 * 83 - 14);
 
         renderEntities();
     }
@@ -148,6 +157,7 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
+        gem.render();
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
@@ -172,7 +182,10 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-pink-girl.png',
+        'images/Selector.png',
+        'images/Gem Blue.png',
+        'images/Gem Orange.png'
     ]);
     Resources.onReady(init);
 
