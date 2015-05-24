@@ -3,7 +3,7 @@ frontend-nanodegree-arcade-game
 
 Use keyboard arrow keys to move the player.
 The water is safe and the lawn is safe from bugs.
-Watch out for the bugs, if they run over you, you use a life.
+Watch out for the bugs, if they run over you, you lose a life.
 The player can sometimes be moving left quickly enough to avoid a collision.
 (This is a bug.)
 Collect the gems.
