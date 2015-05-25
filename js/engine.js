@@ -25,8 +25,12 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
+    var clickCount = 0;
+    var timerValue = 301;
+
     canvas.width = 505;
     canvas.height = 689;
+
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -56,7 +60,14 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+        
+        if ( timerValue === 0 || player.lives === 0 ) {
+                ctx.fillText('GAME OVER - reload page to play again', 230, 40);
+                return;
+        }
+                
+	clickCount++;
+	win.requestAnimationFrame(main);
     };
 
     /* This function does some initial setup that should only occur once,
@@ -138,14 +149,29 @@ var Engine = (function(global) {
             }
         }
 
-        // lets put up some statistics
-        ctx.font = '24px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('Gems', 151, 8 * 83 - 40);
-        ctx.fillText(player.gems, 151, 8 * 83 - 14);
-        ctx.fillText('Lives', 351 , 8 * 83 - 40);
-        ctx.fillText(player.lives, 351, 8 * 83 - 14);
+	// decrement the game timer value
 
+	if ( clickCount % 60 === 0 ) {
+	        timerValue--;
+	}
+
+        // lets put up some statistics
+
+        ctx.font = '19px sans-serif';
+        ctx.textAlign = 'center';
+
+        ctx.fillText('Gems', 351, 8 * 83 - 40);
+        ctx.fillText(player.gems, 351, 8 * 83 - 14);
+
+        ctx.fillText('Crossing', 451, 8 * 83 - 40);
+        ctx.fillText(player.splash, 451, 8 * 83 - 14);
+
+        ctx.fillText('Lives', 51 , 8 * 83 - 40);
+        ctx.fillText(player.lives, 51, 8 * 83 - 14);
+
+       	ctx.fillText('Timer', 151, 8 * 83 - 40);
+	ctx.fillText(timerValue, 151, 8 * 83 - 14);
+	
         renderEntities();
     }
 
