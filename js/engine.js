@@ -25,6 +25,7 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
+    var defDebug = Boolean(false);
     var clickCount = 0;
     var timerValue = 301;
 
@@ -60,14 +61,14 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        
+
         if ( timerValue === 0 || player.lives === 0 ) {
                 ctx.fillText('GAME OVER - reload page to play again', 230, 40);
                 return;
         }
-                
-	clickCount++;
-	win.requestAnimationFrame(main);
+
+        clickCount++;
+        win.requestAnimationFrame(main);
     };
 
     /* This function does some initial setup that should only occur once,
@@ -149,13 +150,13 @@ var Engine = (function(global) {
             }
         }
 
-	// decrement the game timer value
+        // decrement the game timer value
 
-	if ( clickCount % 60 === 0 ) {
-	        timerValue--;
-	}
+        if ( clickCount % 60 === 0 ) {
+                timerValue--;
+        }
 
-        // lets put up some statistics
+        // let's put up some statistics
 
         ctx.font = '19px sans-serif';
         ctx.textAlign = 'center';
@@ -169,9 +170,9 @@ var Engine = (function(global) {
         ctx.fillText('Lives', 51 , 8 * 83 - 40);
         ctx.fillText(player.lives, 51, 8 * 83 - 14);
 
-       	ctx.fillText('Timer', 151, 8 * 83 - 40);
-	ctx.fillText(timerValue, 151, 8 * 83 - 14);
-	
+        ctx.fillText('Timer', 151, 8 * 83 - 40);
+        ctx.fillText(timerValue, 151, 8 * 83 - 14);
+
         renderEntities();
     }
 
@@ -183,12 +184,14 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        gem.render();
+        gem.render(ctx);
         allEnemies.forEach(function(enemy) {
-            enemy.render();
+            if (defDebug) { ctx.fillRect(enemy.x + 0, enemy.y + 80, 70, 60); }
+            enemy.render(ctx);
         });
 
-        player.render();
+        if (defDebug) { ctx.fillRect(player.x + 15, player.y + 65, 71, 53); }
+        player.render(ctx);
     }
 
     /* This function does nothing but it could have been a good place to
@@ -208,10 +211,11 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
+        'images/char-boy.png',
         'images/char-pink-girl.png',
         'images/Selector.png',
-        'images/Gem Blue.png',
-        'images/Gem Orange.png'
+        'images/Gem Orange.png',
+        'images/Gem Blue.png'
     ]);
     Resources.onReady(init);
 

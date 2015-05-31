@@ -1,6 +1,26 @@
 frontend-nanodegree-arcade-game
 ===============================
 
+May 31, 2015 revision.
+Based upon the last review, I have done a code 'refactoring'.
+Hopefully this version follows the Javascrip OO paradigm more closely.
+By moving the image manipulation parameters to a data structure,
+there in just one 'render' function in the superclass.
+Most of the code and functionality remain as before.
+
+I am not understanding the issue related to these comments.
+
+You should declare the player variable here!
+Enemy.prototype.update = function(dt, player) {
+Remember to add the player variable to the update method in your Engine.js file too.
+Please do the same other variables such as ctx throughout your code.
+
+Same here, you should declare player as a function parameter on line 98,
+and then pass the actual player when the function is called.
+
+===============================
+===============================
+
 Obtain the game folder.
 Open the index.html file in the game folder to start the game.
 Use keyboard arrow keys to move the player.
